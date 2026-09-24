@@ -12,6 +12,11 @@ def test_api_live_and_plan():
 def test_cobs_round_trip():
  data=b'a\x00b\x00';assert decode(encode(data))==data
 
+def test_cobs_round_trip_block_boundary():
+ for n in [0,1,252,253,254,255,256,507,508,509,762,1024]:
+  for data in [b'\xab'*n,bytes(n),bytes((i%255)+1 for i in range(n))]:
+   assert decode(encode(data))==data
+
 def test_varint_round_trip():
  for n in [0,1,127,128,999999]:assert vd(ve(n))[0]==n
 

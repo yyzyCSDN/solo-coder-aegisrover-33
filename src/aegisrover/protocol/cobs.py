@@ -12,7 +12,7 @@ def encode(data):
         else:
             out.append(b)
             code += 1
-            if code == 254:
+            if code == 255:
                 out[code_index] = code
                 code_index = len(out)
                 out.append(0)
